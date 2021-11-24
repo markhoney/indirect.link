@@ -1,0 +1,14 @@
+title: NZ Doctors Speaking Out With Science
+tagline: NZ Doctors Speaking Out With Science
+summary: This site shows just how many doctors have made their support of vaccination public, through the signing of an open letter
+description: Despite what the NZDSOS website tells you, very few doctors are anti-vaccine in New Zealand
+url: https://nzd-sos.com
+permalink: /:title
+remote_theme: jonaharagon/jekyll-bootstrap-theme
+timezone: Pacific/Auckland
+author:
+  name: Mark Honeychurch
+  email: mark@honeychurch.org
+plugins:
+  - jekyll-remote-theme
+  - jekyll-sitemap
