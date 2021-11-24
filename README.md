@@ -15,6 +15,7 @@
 - .page
 - .safe
 - .site
+- .to
 
 indirect.link
 
