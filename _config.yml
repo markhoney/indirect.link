@@ -1,8 +1,8 @@
-title: NZ Doctors Speaking Out With Science
-tagline: NZ Doctors Speaking Out With Science
-summary: This site shows just how many doctors have made their support of vaccination public, through the signing of an open letter
-description: Despite what the NZDSOS website tells you, very few doctors are anti-vaccine in New Zealand
-url: https://nzd-sos.com
+title: Indirect Link
+tagline: A way for skeptics to share links without falling foul of overly aggressive social media filters
+#summary: A way for skeptics to share links without falling foul of overly aggressive social media filters
+#description: A way for skeptics to share links without falling foul of overly aggressive social media filters
+#url: https://indirect.link
 permalink: /:title
 remote_theme: jonaharagon/jekyll-bootstrap-theme
 timezone: Pacific/Auckland
