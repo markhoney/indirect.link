@@ -1,5 +1,5 @@
 import {createApp} from 'https://unpkg.com/petite-vue?module';
 createApp({
-	title: 'Hello World',
-	site: window.location.pathname,
+	title: 'Indirect Link',
+	site: window.location.pathname.slice(1),
 }).mount();
