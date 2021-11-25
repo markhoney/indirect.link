@@ -36,10 +36,12 @@
 - dont.link
 - donot.link
 - nope.link
+- nope.to
 - redirect.me
 - send.me
 - sendme.to
 - no.direct
 - nodirect.link
+- skep.link
 
 ## Local testing

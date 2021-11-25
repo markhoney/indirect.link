@@ -9,15 +9,20 @@
 			import {createApp} from 'https://unpkg.com/petite-vue?module';
 			createApp({
 				url: '',
-				get cleanedUrl() {
-					return this.url.replace(/^https?:\/\//, '');
+				get link() {
+					return window.location.host + '/' + this.url;
 				},
+				copy(ref) {
+					this.$refs[ref].select();
+					document.execCommand("copy");
+				}
 			}).mount();
 		</script>
 	</head>
 	<body>
 		<h1>Indirect Link</h1>
-		<input v-model="url">
-		<p>{{}}</p>
+		<input v-model="url"><br>
+		<input ref="link" readonly :value="link" /><button @click="copy('link')">Copy</button>
+		<a :href="link">Open</a>
 	</body>
 </html>
