@@ -5,8 +5,19 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Indirect Link</title>
+		<script type="module">
+			import {createApp} from 'https://unpkg.com/petite-vue?module';
+			createApp({
+				url: '',
+				get cleanedUrl() {
+					return this.url.replace(/^https?:\/\//, '');
+				},
+			}).mount();
+		</script>
 	</head>
 	<body>
 		<h1>Indirect Link</h1>
+		<input v-model="url">
+		<p>{{}}</p>
 	</body>
 </html>

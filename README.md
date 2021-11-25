@@ -6,9 +6,9 @@
 
 [https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains](https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains)
 
-- .click
+- [.click](https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains)
 - .direct
-- l.ink
+- .ink
 - .link
 - .new
 - .now
@@ -16,8 +16,30 @@
 - .page
 - .safe
 - .site
-- .to
+- .me
+- [.to](https://en.wikipedia.org/wiki/Country_code_top-level_domain)
+- .us
+- .al
 
-indirect.link
+### Potential Names
+
+- indirect.link
+- skeptic.al
+- suspicio.us
+- go.to
+- hop.to
+- jump.to
+- link.to
+- indirectl.ink
+- no.link
+- not.link
+- dont.link
+- donot.link
+- nope.link
+- redirect.me
+- send.me
+- sendme.to
+- no.direct
+- nodirect.link
 
 ## Local testing
