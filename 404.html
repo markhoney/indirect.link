@@ -5,7 +5,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		<title>Indirect Link</title>
-		<script src="/js/vue.js" type="module"></script>
+		<script type="module">
+			import {createApp} from 'https://unpkg.com/petite-vue?module';
+			createApp({
+				title: 'Indirect Link',
+				site: window.location.pathname.slice(1),
+			}).mount();
+		</script>
 	</head>
 	<body>
 		<a :href="site" rel="nofollow" rel="noopener" rel="noreferrer">{{site}}</a>
