@@ -9,11 +9,11 @@
 			import {createApp} from 'https://unpkg.com/petite-vue?module';
 			createApp({
 				title: 'Indirect Link',
-				site: window.location.pathname.slice(1),
+				site: window.location.pathname.slice(1).replace('indirect.link/', ''),
 			}).mount();
 		</script>
 	</head>
 	<body>
-		<a :href="site" rel="nofollow" rel="noopener" rel="noreferrer">{{site}}</a>
+		<a :href="site" rel="nofollow noopener noreferrer">{{site}}</a>
 	</body>
 </html>

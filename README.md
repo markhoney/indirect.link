@@ -7,6 +7,7 @@
 [https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains](https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains)
 
 - .click
+- .direct
 - l.ink
 - .link
 - .new
