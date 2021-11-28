@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,8 +31,21 @@
 		</script>
 	</head>
 	<body>
-		<h1>Indirect Link</h1>
-		<p><a :href="url" rel="nofollow noopener noreferrer">{{url}}</a></p>
-		<p>Referrer: {{referrer}}</p>
+		<body class="d-flex flex-column h-100">
+			<header class="p-3 text-center">
+				<nav class="navbar navbar-expand-md text-center"><!-- fixed-top -->
+					<a class="navbar-brand fs-2" href="/">Indirect Link</a>
+				</nav>
+			</header>
+			<main class="flex-shrink-0">
+				<section class="container text-center mt-5">
+					<p><a :href="url" rel="nofollow noopener noreferrer">{{url}}</a></p>
+					<p>Referrer: {{referrer}}</p>
+				</section>
+			</main>
+			<footer class="footer mt-auto py-3 text-center">
+				<p>Copyright 2021 <a href="https://skeptics.nz" target="_blank" class="text-reset">NZ Skeptics</a></p>
+			</footer>
+		</body>
 	</body>
 </html>

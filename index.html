@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Indirect Link</title>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 		<script type="module">
 			import {createApp} from 'https://unpkg.com/petite-vue?module';
 			createApp({
@@ -22,20 +23,21 @@
 	</head>
 	<body class="d-flex flex-column h-100">
 		<header class="p-3 text-center">
-			<nav class="navbar navbar-expand-md fixed-top text-center">
-				<h1>Indirect Link</h1>
+			<nav class="navbar navbar-expand-md text-center"><!-- fixed-top -->
+				<a class="navbar-brand fs-2" href="/">Indirect Link</a>
 			</nav>
 		</header>
 		<main class="flex-shrink-0">
-			<section class="container text-center">
-				<input v-model="url">
-				<p><a :href="link" rel="nofollow noopener noreferrer">{{link}}</a></p>
-				<button @click="navigator.clipboard.writeText(link)">Copy</button>
-				<a :href="link" rel="nofollow noopener noreferrer">Open</a>
+			<section class="container text-center mt-5">
+				<input v-model="url" class="fs-3 w-75">
+				<p class="fs-1">
+					<a :href="link" rel="nofollow noopener noreferrer">{{link}}</a>
+					<i class="bi-clipboard-plus fs-3" style="cursor: copy" @click="navigator.clipboard.writeText(link)" title="Copy to clipboard"></i>
+				</p>
 			</section>
 		</main>
-		<footer class="footer mt-auto py-4 text-center">
-			<p>Copyright 2021 NZ Skeptics</p>
+		<footer class="footer mt-auto py-3 text-center">
+			<p>Copyright 2021 <a href="https://skeptics.nz" target="_blank" class="text-reset">NZ Skeptics</a></p>
 		</footer>
 	</body>
 </html>
