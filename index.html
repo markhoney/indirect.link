@@ -25,7 +25,9 @@
 		</header>
 		<main class="flex-shrink-0">
 			<section class="container text-center mt-5">
-				<input v-model="url" class="fs-3 w-75" placeholder="Enter URL here...">
+				<label for="url" class="form-label fs-3">Enter your blacklisted URL here</label>
+				<input id="url" v-model="url" class="w-100 form-control form-control-lg fs-2" placeholder="e.g. https://naturalnews.com/">
+				<p class="fs-3 mt-5 text-center">Use this safe URL in social media</p>
 				<p class="fs-1">
 					<a :href="link" rel="nofollow noopener noreferrer">{{link}}</a>
 					<i class="bi-clipboard-plus fs-3" style="cursor: copy" @click="navigator.clipboard.writeText(link)" title="Copy to clipboard"></i>
