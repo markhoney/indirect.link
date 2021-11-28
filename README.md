@@ -44,4 +44,8 @@
 - nodirect.link
 - skep.link
 
+### Registrars
+
+[https://register.to/](https://register.to/)
+
 ## Local testing
