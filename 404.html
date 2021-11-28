@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
@@ -10,11 +10,26 @@
 			createApp({
 				site: window.location.pathname.slice(1).replace('indirect.link/', ''),
 				referrer: document.referrer,
+				get url() {
+					const split = this.site.split('/');
+					if (split.length < 3 || !split[0].startsWith('http') || split[1] !== '') {
+						return null;
+					}
+					split[2] = split[2].replace(/[^\-\.abcdefghijklmnopqrstuvwxyz0123456789ßàÁâãóôþüúðæåïçèõöÿýòäœêëìíøùîûñé]/g, '');
+					let url;
+					try {
+						url = new URL(split.join('/'));
+					} catch (e) {
+						return null;
+					}
+
+					return url;
+				},
 			}).mount();
 		</script>
 	</head>
 	<body>
-		<a :href="site" rel="nofollow noopener noreferrer">{{site}}</a>
-		{{referrer}}
+		<p><a :href="url" rel="nofollow noopener noreferrer">{{url}}</a></p>
+		<p>Referrer: {{referrer}}</p>
 	</body>
 </html>
