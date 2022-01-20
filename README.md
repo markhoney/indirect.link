@@ -43,6 +43,10 @@
 - no.direct
 - nodirect.link
 - skep.link
+- nooo.link
+- niet.link
+- cull.link
+-
 
 ### Registrars
 
