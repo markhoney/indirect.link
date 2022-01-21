@@ -13,20 +13,33 @@
 			createApp({
 				site: window.location.pathname.slice(1).replace('indirect.link/', ''),
 				referrer: document.referrer,
+				redirect: null,
 				get url() {
 					const split = this.site.split('/');
-					if (split.length < 3 || !split[0].startsWith('http') || split[1] !== '') {
-						// LZString.decompressFromUint8Array();
-						return null;
+					if (split[0] === 'r') {
+						this.redirect = 0;
+						split.shift();
+					} else if (Number.isInteger(Number(split[0]))) {
+						this.redirect = Number(split[0]);
+						split.shift();
 					}
-					split[2] = split[2].replace(/[^\-\.abcdefghijklmnopqrstuvwxyz0123456789ßàÁâãóôþüúðæåïçèõöÿýòäœêëìíøùîûñé]/g, '');
+					if (split[0].startsWith('BYFxAcGcC4Hp')) return LZString.decompressFromUint8Array(split[0]);
 					let url;
 					try {
 						url = new URL(split.join('/'));
 					} catch (e) {
 						return null;
 					}
-					return url;
+					url.host = url.host.replace(/[^\-\.abcdefghijklmnopqrstuvwxyz0123456789ßàÁâãóôþüúðæåïçèõöÿýòäœêëìíøùîûñé]/g, '');
+					return url.toString();
+				},
+				get redirect() {
+
+				},
+				watch: {
+					redirect() {
+
+					}
 				},
 				redirect(url) {
 					window.location.replace(url);

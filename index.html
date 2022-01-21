@@ -12,6 +12,10 @@
 			import {createApp} from 'https://unpkg.com/petite-vue?module';
 			createApp({
 				url: '',
+				obscure: false,
+				redirect: false,
+				warning: true,
+				invalid: '_',
 				get link() {
 					let url;
 					try {
@@ -23,7 +27,28 @@
 							return null;
 						}
 					}
-					return window.location.host + '/' + LZString.compressToEncodedURIComponent(url.toString());
+					if (this.obscure) {
+						url = LZString.compressToEncodedURIComponent(url.toString());
+					} else {
+						const split = url.host.split('.');
+						let longest = 0;
+						let index = null;
+						for (const [i, value] of split.entries()) {
+							if (value.length >= longest) {
+								longest = value.length;
+								index = i;
+							}
+						}
+						const middle = Math.ceil(split[index].length / 2);
+						split[index] = split[index].slice(0, middle) + this.invalid + split[index].slice(middle);
+						url.host = split.join('.');
+						url = url.toString();
+					}
+					if (this.redirect) url = 'r/' + url;
+					return window.location.host + '/' + url;
+				},
+				mounted() {
+					new bootstrap.Tooltip(this.$refs.copy);
 				},
 			}).mount();
 		</script>
@@ -37,13 +62,33 @@
 		<main class="flex-shrink-0">
 			<section class="container text-center mt-5">
 				<label for="url" class="form-label fs-3">Enter your blacklisted URL here</label>
-				<input id="url" v-model="url" class="w-100 form-control form-control-lg fs-2" placeholder="e.g. https://naturalnews.com/">
-				<p class="fs-3 mt-5 text-center">Use this safe URL in social media</p>
-				<p class="fs-1">
-					<a v-if="link" :href="link" rel="nofollow noopener noreferrer">{{link}}</a>
-					<span v-else style="color: red">Please enter a valid URL</span>
-					<i class="bi-clipboard-plus fs-3" style="cursor: copy" @click="navigator.clipboard.writeText(link)" title="Copy to clipboard"></i>
-				</p>
+				<input type="text" id="url" v-model="url" class="w-100 form-control form-control-lg fs-2" placeholder="e.g. https://naturalnews.com/">
+				<div class="form-check form-switch">
+					<input type="checkbox" id="obscure" v-model="obscure" class="form-check-input">
+					<label for="obscure" class="form-check-label">Obscure URL</label>
+				</div>
+				<div class="form-check form-switch">
+					<input type="checkbox" id="redirect" v-model="redirect" class="form-check-input">
+					<label for="redirect" class="form-check-label">Automatic Redirect</label>
+				</div>
+				<div v-if="link">
+					<p class="fs-3 mt-5 text-center">Use this safe URL in your social media posts</p>
+					<p class="fs-1 text-wrap">
+						<a v-if="link" :href="link" rel="nofollow noopener noreferrer">{{link}}</a>
+					</p>
+					<p>
+						<i
+							ref="copy"
+							class="bi-clipboard-plus fs-3"
+							style="cursor: copy"
+							data-bs-toggle="tooltip"
+							data-bs-placement="right"
+							title="Copy to clipboard"
+							@click="navigator.clipboard.writeText(link)"
+						></i>
+					</p>
+				</div>
+				<p v-else-if="warning && link?.length" class="fs-1 text-danger">Please enter a valid URL</p>
 			</section>
 		</main>
 		<footer class="footer mt-auto py-3 text-center bg-dark text-light">
