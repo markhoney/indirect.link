@@ -53,3 +53,36 @@
 [https://register.to/](https://register.to/)
 
 ## Local testing
+
+## Character Sets
+### URL
+
+A-Z a-z 0-9 - . _ ~ : / ? # [ ] @ ! $ & ' ( ) * + , ; % =
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&'()*+,;%=
+
+= 85 characters
+
+### URL Path
+
+A-Z a-z 0-9 _ . \ -
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.\-
+
+= 66 characters
+
+### Base64
+
+A-Z a-z 0-9 + /
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/
+
+= 64 characters
+
+### Base64 URL
+
+A-Z a-z 0-9 - _
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_
+
+= 64 characters
