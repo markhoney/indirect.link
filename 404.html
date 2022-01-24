@@ -14,8 +14,8 @@
 			createApp({
 				site: window.location.pathname.slice(1).replace('indirect.link/', ''),
 				referrer: document.referrer,
-				redirect: null,
 				referrers: [
+					"http://localhost",
 					"https://www.facebook.com/HumanistNZ",
 					"https://www.facebook.com/nzskeptics",
 					"https://www.facebook.com/groups/nzskeptics",
@@ -30,7 +30,17 @@
 					if (this.referrers.find((referrer) => document.referrer.startsWith(referrer))) return true;
 					return false;
 				},
+				get redirect() {
+					const split = this.site.split('/');
+					if (split[0] === 'r') {
+						return 0;
+					} else if (Number.isInteger(Number(split[0]))) {
+						return Number(split[0]);
+					}
+					return null;
+				},
 				get url() {
+					if (!this.valid) return;
 					const split = this.site.split('/');
 					if (split[0] === 'r') {
 						this.redirect = 0;
@@ -40,7 +50,7 @@
 						split.shift();
 					}
 					console.log(split[0]);
-					if (!split[0].includes('.')) return convert(split.join('/'), dict[64], dict[85]);
+					if (!split[0].includes('.')) return convert(split.join('/'), dict.base85uri, dict.base64url);
 					let url;
 					try {
 						url = new URL(split.join('/'));
@@ -50,16 +60,14 @@
 					url.host = url.host.replace(/[^\-\.abcdefghijklmnopqrstuvwxyz0123456789ßàÁâãóôþüúðæåïçèõöÿýòäœêëìíøùîûñé]/g, '');
 					return url.toString();
 				},
-				get redirect() {
-
-				},
 				watch: {
 					redirect() {
-
-					}
-				},
-				redirect(url) {
-					window.location.replace(url);
+						if (this.valid) {
+							setTimeout(() => {
+								window.location.replace(url);
+							}, redirect * 1000);
+						}
+					},
 				},
 			}).mount();
 		</script>
