@@ -29,7 +29,7 @@
 						}
 					}
 					if (this.obscure) {
-						url = convert(url.toString(), dict[85], dict[64]);
+						url = convert(url.toString(), dict.base85uri, dict.base64url);
 					} else {
 						const split = url.host.split('.');
 						let longest = 0;
