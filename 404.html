@@ -7,13 +7,29 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-		<script type="text/javascript" src="https://unpkg.com/lz-string"></script>
+		<script type="text/javascript" src="/basex.js"></script>
+		<script type="text/javascript" src="/indirect.link/basex.js"></script>
 		<script type="module">
 			import {createApp} from 'https://unpkg.com/petite-vue?module';
 			createApp({
 				site: window.location.pathname.slice(1).replace('indirect.link/', ''),
 				referrer: document.referrer,
 				redirect: null,
+				referrers: [
+					"https://www.facebook.com/HumanistNZ",
+					"https://www.facebook.com/nzskeptics",
+					"https://www.facebook.com/groups/nzskeptics",
+					"https://www.facebook.com/groups/nzskepticsclosedgroup",
+					"https://www.facebook.com/groups/rationalistsnz",
+					"https://www.facebook.com/groups/ScienceBasedHealthcare",
+					"https://www.facebook.com/groups/rabbitholeresistance",
+					"https://www.facebook.com/groups/426054588754056"
+				],
+				get valid() {
+					if (!document.referrer) return null;
+					if (this.referrers.find((referrer) => document.referrer.startsWith(referrer))) return true;
+					return false;
+				},
 				get url() {
 					const split = this.site.split('/');
 					if (split[0] === 'r') {
@@ -23,7 +39,8 @@
 						this.redirect = Number(split[0]);
 						split.shift();
 					}
-					if (split[0].startsWith('BYFxAcGcC4Hp')) return LZString.decompressFromUint8Array(split[0]);
+					console.log(split[0]);
+					if (!split[0].includes('.')) return convert(split.join('/'), dict[64], dict[85]);
 					let url;
 					try {
 						url = new URL(split.join('/'));
@@ -55,14 +72,11 @@
 		</header>
 		<main class="flex-shrink-0">
 			<section class="container text-center mt-5">
-			<main class="flex-shrink-0">
-				<section class="container text-center mt-5">
-					<p><a :href="url" rel="nofollow noopener noreferrer">{{url}}</a></p>
-					<p>Referrer: {{referrer}}</p>
-				</section>
-			</main>
-			<footer class="footer mt-auto py-3 text-center bg-dark text-light">
-				<p>Copyright 2021 <a href="https://skeptics.nz" target="_blank" class="text-reset">NZ Skeptics</a></p>
-			</footer>
-		</body>
+				<p v-if="valid"><a :href="url" rel="nofollow noopener noreferrer">{{url}}</a></p>
+			</section>
+		</main>
+		<footer class="footer mt-auto py-3 text-center bg-dark text-light">
+			<p>Copyright 2022 <a href="https://skeptics.nz" target="_blank" class="text-reset">NZ Skeptics</a></p>
+		</footer>
+	</body>
 </html>
