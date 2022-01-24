@@ -1,16 +1,21 @@
 const dict = {
-	64: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_',
-	66: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.\\-',
-	85: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&'()*+,;%=",
+	base16: '0123456789ABCDEF',
+	base32: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567',
+	base64: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/',
+	base64url: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_',
+	base66url: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.\\-',
+	base85uri: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&'()*+,;%=",
 };
+
 function add(x, y, base) {
 	var _m = Math.max(x.length, y.length);
-	for(var _c = _n = 0,_r = []; _n < _m || _c; _c = Math.floor(_z / base)) {
+	for (var _c = _n = 0,_r = []; _n < _m || _c; _c = Math.floor(_z / base)) {
 		var _z = _c + (_n < x.length ? x[_n] : 0) + (_n < y.length ? y[_n] : 0);
 		var _n = _r.push(_z % base);
 	}
 	return _r;
 }
+
 function mul(x, pow, base) {
 	for(var _r = x < 0 ? null : []; x > 0; x = x >> 1) {
 		if(x & 1) _r = add(_r, pow, base);
@@ -18,6 +23,7 @@ function mul(x, pow, base) {
 	}
 	return _r;
 }
+
 function convert(str, from, to) {
 	if (!str) return;
 	if (typeof from === 'string') from = from.split('');
