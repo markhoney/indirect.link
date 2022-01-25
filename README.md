@@ -1,4 +1,4 @@
-# Indirect Link
+# Weak Link
 
 ## Potential Domain name
 
@@ -86,3 +86,40 @@ A-Z a-z 0-9 - _
 ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_
 
 = 64 characters
+
+am
+an
+as
+at
+be
+do
+eh
+go
+hi
+if
+in
+is
+it
+me
+my
+no
+of
+
+nogo
+dono
+nota
+notmy
+dono
+gogo
+nono.link - $59
+nil.link - $59
+nah.link - $59
+bye.link - $59
+bum.link - $59
+fail.link - $59
+gray/grey.link - $59
+none.link - $59
+okay.link - $59
+risky.link - $59
+
+weak.link = $59
