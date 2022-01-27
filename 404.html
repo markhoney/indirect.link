@@ -14,22 +14,24 @@
 				site: window.location.pathname.slice(1).replace('weak.link/', ''),
 				referrer: document.referrer,
 				referrers: [
-					"http://localhost",
-					"https://www.facebook.com/HumanistNZ",
-					"https://www.facebook.com/nzskeptics",
-					"https://www.facebook.com/groups/nzskeptics",
-					"https://www.facebook.com/groups/nzskepticsclosedgroup",
-					"https://www.facebook.com/groups/rationalistsnz",
-					"https://www.facebook.com/groups/ScienceBasedHealthcare",
-					"https://www.facebook.com/groups/rabbitholeresistance",
-					"https://www.facebook.com/groups/426054588754056"
+					'http://localhost',
+					'https://weak.link',
+					'https://www.facebook.com/nzskeptics',
+					'https://www.facebook.com/groups/nzskeptics',
+					'https://www.facebook.com/groups/nzskepticsclosedgroup',
+					'https://www.facebook.com/groups/ScienceBasedHealthcare',
+					'https://www.facebook.com/groups/rabbitholeresistance',
+					'https://www.facebook.com/groups/426054588754056',
+					'https://www.facebook.com/groups/rationalistsnz',
+					'https://www.facebook.com/HumanistNZ',
 				],
+				redirect: false,
 				get valid() {
 					if (!document.referrer) return null;
 					if (this.referrers.find((referrer) => document.referrer.startsWith(referrer))) return true;
 					return false;
 				},
-				get redirect() {
+				/* get redirect() {
 					const split = this.site.split('/');
 					if (split[0] === 'r') {
 						return 0;
@@ -37,7 +39,7 @@
 						return Number(split[0]);
 					}
 					return null;
-				},
+				}, */
 				get url() {
 					if (!this.valid) return;
 					const split = this.site.split('/');
@@ -48,7 +50,6 @@
 						this.redirect = Number(split[0]);
 						split.shift();
 					}
-					console.log(split[0]);
 					if (!split[0].includes('.')) return convert(split.join('/'), dict.base85uri, dict.base64url);
 					let url;
 					try {
@@ -57,16 +58,13 @@
 						return null;
 					}
 					url.host = url.host.replace(/[^\-\.abcdefghijklmnopqrstuvwxyz0123456789ßàÁâãóôþüúðæåïçèõöÿýòäœêëìíøùîûñé]/g, '');
-					return url.toString();
-				},
-				watch: {
-					redirect() {
-						if (this.valid) {
-							setTimeout(() => {
-								window.location.replace(url);
-							}, redirect * 1000);
-						}
-					},
+					url = url.toString();
+					if (this.redirect !== false) {
+						setTimeout(() => {
+							window.location.replace(url);
+						}, redirect * 1000);
+					}
+					return url;
 				},
 			}).mount();
 		</script>
