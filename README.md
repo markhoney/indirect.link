@@ -82,7 +82,6 @@ To add an automatic redirect to the URL, rather than having someone click the li
 - nooo.link
 - niet.link
 - cull.link
--
 
 ### Registrars
 
@@ -90,8 +89,8 @@ To add an automatic redirect to the URL, rather than having someone click the li
 
 ## Local testing
 
-
 ## URL Encoding
+
 ### Character Sets
 
 #### Domain Name
@@ -101,6 +100,7 @@ a-z 0-9 -
 abcdefghijklmnopqrstuvwxyz0123456789-
 
 =37 characters
+
 #### URL
 
 A-Z a-z 0-9 - . _ ~ : / ? # [ ] @ ! $ & ' ( ) * + , ; % =
@@ -135,7 +135,11 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_
 
 ## Words for domain name
 
+### Two letter words
+
 am, an, as, at, be, do, eh, go, hi, if, in, is, it, me, my, no, of
+
+### Combinations of words
 
 - nogo
 - dono
@@ -143,6 +147,8 @@ am, an, as, at, be, do, eh, go, hi, if, in, is, it, me, my, no, of
 - notmy
 - dono
 - gogo
+
+## Short domain names
 
 - nono.link - $59
 - nil.link - $59
