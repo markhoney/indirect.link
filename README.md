@@ -6,11 +6,11 @@ We've seen a problem recently with skeptical Facebook groups being warned that m
 
 ## Modes
 
-There are two modes to the URLs.
+There are two modes to the URLs. A simple mode, that can be used manually, and a mode that fully obscures the original URL.
 
 ### URL obscuration
 
-This simple mode allows people to manually edit a link by prepending it with this site's domain name and a forward slash - weak.link/.
+This simple mode allows people to manually edit a link by prepending it with this site's domain name and a forward slash - `weak.link/`.
 
 So for example, if we wanted to share a link to `https://misinformation.com/bad-page` safely, we could add `weak.link/` to the beginning of the URL, giving us `weak.link/https://misinformation.com/bad-page`.
 
@@ -135,40 +135,23 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_
 
 ## Words for domain name
 
-am
-an
-as
-at
-be
-do
-eh
-go
-hi
-if
-in
-is
-it
-me
-my
-no
-of
+am, an, as, at, be, do, eh, go, hi, if, in, is, it, me, my, no, of
 
-nogo
-dono
-nota
-notmy
-dono
-gogo
+- nogo
+- dono
+- nota
+- notmy
+- dono
+- gogo
 
-nono.link - $59
-nil.link - $59
-nah.link - $59
-bye.link - $59
-bum.link - $59
-fail.link - $59
-gray/grey.link - $59
-none.link - $59
-okay.link - $59
-risky.link - $59
-
-weak.link = $59
+- nono.link - $59
+- nil.link - $59
+- nah.link - $59
+- bye.link - $59
+- bum.link - $59
+- fail.link - $59
+- gray/grey.link - $59
+- none.link - $59
+- okay.link - $59
+- risky.link - $59
+- weak.link = $59
