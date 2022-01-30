@@ -30,11 +30,21 @@ When one of these links is opened, by default it will take the user to a page th
 
 To add an automatic redirect to the URL, rather than having someone click the link, `r/` can be appended to the prefix. So instead of using `weak.link/`, you would use `weak.link/r/`. If a delay before redirecting is required, maybe because the user should be given time to read the warning, then the `r/` can be replaced by an integer number of seconds, for example `weak.link/5/`.
 
+### Misuse
+
+To prevent misuse of this site by people wanting to uncritically share misinformation on social media, a list of allowed referrers is used. If a referrer is not on the list when a link is clicked, the link will not be displayed or opened.
+
+All links from this site to misinformation use a `noreferrer` attribute, to stop the misinformation site knowing where the link came from. They also use `nofollow` to ensure that page ranking is not conferred to the site, and finally they use `noopener` to prevent access to the window.opener variable (another form of referrer).
+
 ## Technology
 
 ### Petite Vue
 
+[Petite Vue](https://github.com/vuejs/petite-vue) is a cut-down runtime for [Vue](https://vuejs.org/) optimised for direct frontend inclusion. This site uses Petite Vue to manage frontend updates, such as the URL obscuration and encoding/decoding, and page redirects.
 
+## Local testing
+
+This site is built to be hosted as a static site, on a service like GitHub Pages. As such, using a simple local server such as VS Code's Live Server should be sufficient to test the site. Just right click the index.html page in VS Code and click the `Open with Live Server` option.
 
 ## Potential Domain name
 
@@ -86,8 +96,6 @@ To add an automatic redirect to the URL, rather than having someone click the li
 ### Registrars
 
 [https://register.to/](https://register.to/)
-
-## Local testing
 
 ## URL Encoding
 
