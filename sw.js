@@ -5,6 +5,7 @@ const files = [
 	'https://unpkg.com/petite-vue?module',
 	'/basex.js',
 	'/index.html',
+	'/logo.svg',
 ];
 
 self.addEventListener('install', (event) => {
