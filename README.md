@@ -1,8 +1,8 @@
 # Weak Link
 
-This site is an attempt to solve the problems of sharing URL links to misinformation on Facebook and other social media sites.
+This site is an attempt to solve the problem of sharing URL links to misinformation on Facebook and other social media sites.
 
-We've seen a problem recently with skeptical Facebook groups being warned that member are sharing misinformation. To help guard against this, this website can act as a proxy, allowing people to share links to websites indirectly through the use of a prefix URL that can be prepended to an existing URL.
+We've seen a problem recently with skeptical Facebook groups being warned that members are sharing misinformation. To help guard against this, this website can act as a proxy, allowing people to share links to websites indirectly, through the use of a prefix URL that can be prepended to an existing URL.
 
 ## Modes
 
@@ -45,6 +45,50 @@ All links from this site to misinformation use a `noreferrer` attribute, to stop
 ## Local testing
 
 This site is built to be hosted as a static site, on a service like GitHub Pages. As such, using a simple local server such as VS Code's Live Server should be sufficient to test the site. Just right click the index.html page in VS Code and click the `Open with Live Server` option.
+
+## URL Encoding
+
+### Character Sets
+
+#### Domain Name
+
+a-z 0-9 -
+
+abcdefghijklmnopqrstuvwxyz0123456789-
+
+=37 characters
+
+#### URL
+
+A-Z a-z 0-9 - . _ ~ : / ? # [ ] @ ! $ & ' ( ) * + , ; % =
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&'()*+,;%=
+
+= 85 characters
+
+#### URL Path
+
+A-Z a-z 0-9 _ . \ -
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.\-
+
+= 66 characters
+
+#### Base64
+
+A-Z a-z 0-9 + /
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/
+
+= 64 characters
+
+#### Base64 URL
+
+A-Z a-z 0-9 - _
+
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_
+
+= 64 characters
 
 ## Potential Domain name
 
@@ -96,50 +140,6 @@ This site is built to be hosted as a static site, on a service like GitHub Pages
 ### Registrars
 
 [https://register.to/](https://register.to/)
-
-## URL Encoding
-
-### Character Sets
-
-#### Domain Name
-
-a-z 0-9 -
-
-abcdefghijklmnopqrstuvwxyz0123456789-
-
-=37 characters
-
-#### URL
-
-A-Z a-z 0-9 - . _ ~ : / ? # [ ] @ ! $ & ' ( ) * + , ; % =
-
-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#[]@!$&'()*+,;%=
-
-= 85 characters
-
-#### URL Path
-
-A-Z a-z 0-9 _ . \ -
-
-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.\-
-
-= 66 characters
-
-#### Base64
-
-A-Z a-z 0-9 + /
-
-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/
-
-= 64 characters
-
-#### Base64 URL
-
-A-Z a-z 0-9 - _
-
-ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_
-
-= 64 characters
 
 ## Words for domain name
 
