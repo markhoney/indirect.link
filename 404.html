@@ -72,7 +72,7 @@
 						this.redirect = Number(split[0]);
 						split.shift();
 					}
-					if (!split[0].includes('.')) return convert(split.join('/'), dict.base85uri, dict.base64url);
+					if (!split[0].includes('.')) return basex.convert(split.join('/'), basex.dict.base85uri, basex.dict.base64url);
 					let url;
 					try {
 						url = new URL(split.join('/'));
