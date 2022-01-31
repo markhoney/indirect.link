@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /$
+Allow: /index.html
+Allow: /about
+Allow: /about/index.html
+Disallow: /
