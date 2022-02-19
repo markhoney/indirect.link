@@ -29,9 +29,10 @@
 			import {createApp} from 'https://unpkg.com/petite-vue?module';
 			createApp({
 				site: window.location.pathname.slice(1).replace('weak.link/', ''),
-				referrer: document.referrer,
+				referrer: document.referrer || history.previous,
 				referrers: [
 					'http://localhost',
+					'http://127.0.0.1',
 					'https://weak.link',
 					'https://www.facebook.com/nzskeptics',
 					'https://www.facebook.com/groups/nzskeptics',
@@ -43,9 +44,16 @@
 					'https://www.facebook.com/HumanistNZ',
 				],
 				redirect: false,
+				get referrer() {
+					return document.referrer || history.previous;
+					// if (document.referrer) return document.referrer;
+					// if (history.previous) return history.previous;
+				},
 				get valid() {
-					if (!document.referrer) return null;
-					if (this.referrers.find((referrer) => document.referrer.startsWith(referrer))) return true;
+					// console.log('document.referrer', document.referrer);
+					// console.log('history', history);
+					if (!this.referrer) return null;
+					if (this.referrers.find((ref) => this.referrer.startsWith(ref))) return true;
 					return false;
 				},
 				/* get redirect() {
@@ -58,7 +66,7 @@
 					return null;
 				}, */
 				get url() {
-					if (!this.valid) return;
+					// if (!this.valid) return;
 					const split = this.site.split('/');
 					if (split[0] === 'r') {
 						this.redirect = 0;
@@ -67,8 +75,8 @@
 						this.redirect = Number(split[0]);
 						split.shift();
 					}
-					if (!split[0].includes('.')) return basex.convert(split.join('/'), basex.dict.base85uri, basex.dict.base64url);
-					let url;
+					if (!split[0].includes('.')) return basex.convert(split.join('/'), basex.dict.base64url, basex.dict.base85uri);
+					return split;
 					try {
 						url = new URL(split.join('/'));
 					} catch (e) {
