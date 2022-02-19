@@ -6,7 +6,7 @@
 		<title>Weak Link</title>
 		<meta property="og:site_name" content="Weak Link">
 		<meta property="og:title" content="Warning: Potential Misinformation">
-		<meta property="og:description" name="description" content="Caution: The website you are about to be linked to likely contains misinformation. It has been obfuscated to allow sharing of dubious content on social media by skeptical groups">
+		<meta property="og:description" name="description" content="Caution: The website you are about to be linked to likely contains misinformation. It has been obfuscated to allow sharing of dubious content on social media by groups who are skeptical of their content.">
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://weak.link">
 		<meta property="og:image" content="https://weak.link/logo.jpg">
@@ -43,30 +43,32 @@
 					'https://www.facebook.com/groups/rationalistsnz',
 					'https://www.facebook.com/HumanistNZ',
 				],
-				redirect: false,
+				url: null,
+				redirect: null,
+				warning: {
+					title: document.querySelector("meta[property='og:title']").getAttribute('content'),
+					text: document.querySelector("meta[property='og:description']").getAttribute('content'),
+				},
 				get referrer() {
 					return document.referrer || history.previous;
-					// if (document.referrer) return document.referrer;
-					// if (history.previous) return history.previous;
 				},
 				get valid() {
-					// console.log('document.referrer', document.referrer);
-					// console.log('history', history);
+					return true;
 					if (!this.referrer) return null;
 					if (this.referrers.find((ref) => this.referrer.startsWith(ref))) return true;
 					return false;
 				},
-				/* get redirect() {
-					const split = this.site.split('/');
-					if (split[0] === 'r') {
-						return 0;
-					} else if (Number.isInteger(Number(split[0]))) {
-						return Number(split[0]);
-					}
-					return null;
-				}, */
-				get url() {
-					// if (!this.valid) return;
+				countdown() {
+					if (this.redirect < 1) this.go();
+					setTimeout(() => {
+						this.redirect -= 1;
+						this.countdown();
+					}, 1000);
+				},
+				go() {
+					window.location.replace(this.url);
+				},
+				getURL() {
 					const split = this.site.split('/');
 					if (split[0] === 'r') {
 						this.redirect = 0;
@@ -75,21 +77,23 @@
 						this.redirect = Number(split[0]);
 						split.shift();
 					}
-					if (!split[0].includes('.')) return basex.convert(split.join('/'), basex.dict.base64url, basex.dict.base85uri);
-					return split;
-					try {
-						url = new URL(split.join('/'));
-					} catch (e) {
-						return null;
+					if (!split[0].includes('.')) this.url = basex.convert(split.join('/'), basex.dict.base64url, basex.dict.base85uri);
+					else {
+						let url;
+						try {
+							url = new URL(split.join('/'));
+						} catch (e) {
+							// return null;
+							console.log(e);
+						}
+						url.host = url.host.replace(/[^\-\.abcdefghijklmnopqrstuvwxyz0123456789ßàÁâãóôþüúðæåïçèõöÿýòäœêëìíøùîûñé]/g, '');
+						this.url = url.toString();
 					}
-					url.host = url.host.replace(/[^\-\.abcdefghijklmnopqrstuvwxyz0123456789ßàÁâãóôþüúðæåïçèõöÿýòäœêëìíøùîûñé]/g, '');
-					url = url.toString();
-					if (this.redirect !== false) {
-						setTimeout(() => {
-							window.location.replace(url);
-						}, redirect * 1000);
-					}
-					return url;
+					if (this.redirect !== null) this.countdown();
+					// else this.go();
+				},
+				mounted() {
+					this.getURL();
 				},
 			}).mount();
 		</script>
@@ -97,17 +101,27 @@
 	<body class="d-flex flex-column h-100">
 		<header class="p-3 text-center bg-dark text-light">
 			<nav class="navbar navbar-expand-md text-center"><!-- fixed-top -->
-				<a class="navbar-brand fs-2 text-reset" href="/">
+				<a class="navbar-brand fs-1 text-reset" href="/">
 					<img src = "/logo.svg" alt="" style="height: 0.8em; margin-right: 0.2em;" />
 					Weak Link
 				</a>
 			</nav>
 		</header>
-		<main class="flex-shrink-0">
+		<main class="flex-shrink-0" @vue:mounted="mounted">
 			<section class="container text-center mt-5">
-				<p v-if="valid"><a :href="url" rel="nofollow noopener noreferrer">{{url}}</a></p>
+				<div class="alert alert-danger d-flex align-items-center mb-5" role="alert">
+					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+					<div>
+						<h2>{{warning.title}}</h2>
+						<p>{{warning.text}}</p>
+					</div>
+				</div>
+				<p v-if="redirect !== null">Redirecting you <span v-if="redirect">in {{redirect}} seconds </span>to...</p>
+				<p v-else>Click this link...</p>
+				<p v-if="valid" class="fs-2"><a :href="url" rel="nofollow noopener noreferrer">{{url}}</a></p>
 				<p v-else-if="valid === false">Invalid Referrer</p>
 				<p v-else>Invalid URL</p>
+				<p>(Referrer: {{referrer}})</p>
 			</section>
 		</main>
 		<footer class="footer mt-auto py-3 text-center bg-dark text-light">
