@@ -36,10 +36,10 @@
 				get path() {
 					let url;
 					try {
-						url = new URL(this.url);
+						url = new URL(this.url.trim());
 					} catch (e) {
 						try {
-							url = new URL('https://' + this.url);
+							url = new URL('https://' + this.url.trim());
 						} catch (e) {
 							return null;
 						}
@@ -85,8 +85,18 @@
 		<main class="flex-shrink-0">
 			<section class="container mt-5">
 				<div class="text-center">
-					<label for="url" class="form-label fs-3">Enter your link here:</label>
-					<input type="text" id="url" v-model="url" class="w-100 form-control form-control-lg fs-2 my-4" placeholder="e.g. https://misinformation.com/">
+					<label for="url" class="form-label fs-3">Add your link here:</label>
+					<input
+						type="text"
+						id="url"
+						type="url"
+						spellcheck="false"
+						autocorrect="no"
+						v-model="url"
+						class="w-100 form-control form-control-lg fs-2 my-4"
+						placeholder="e.g. https://misinformation.com/"
+						required
+					>
 				</div>
 				<div>
 					<div class="form-check form-switch d-inline-block">
@@ -99,13 +109,16 @@
 						<label for="redirect" class="form-check-label">Automatic Redirect</label>
 					</div>
 				</div>
-				<p class="fs-3 mt-5 text-center">Share this link on social media:</p>
-				<div v-if="link" class="text-center">
-					<p class="fs-1" style="word-wrap: break-word">
-						<a v-if="link" :href="path">{{link}}</a><!-- rel="nofollow noopener noreferrer" -->
+				<p class="fs-3 mt-5 text-center">Use this link on social media:</p>
+				<div class="text-center">
+					<p class="w-100 form-control form-control-lg fs-2 my-4" style="word-wrap: break-word">
+							<a v-if="link" :href="path">{{link}}</a>
+						<span v-else-if="url" class="fs-1 text-danger">Please enter a valid URL</span>
+						<span v-else>&nbsp;</span>
 					</p>
 					<p>
 						<i
+							v-if="link"
 							ref="copy"
 							class="bi-clipboard-plus fs-3"
 							style="cursor: copy"
@@ -116,7 +129,6 @@
 						></i>
 					</p>
 				</div>
-				<p v-else-if="warning && link?.length" class="fs-1 text-danger">Please enter a valid URL</p>
 			</section>
 		</main>
 		<footer class="footer mt-auto py-3 text-center bg-dark text-light">
