@@ -31,8 +31,24 @@
 				url: '',
 				obscure: true,
 				redirect: false,
+				redirectTime: '0',
 				warning: true,
 				invalid: '_',
+				get redirectValue() {
+					if (!this.redirect) return '';
+					if (this.redirectTime === '0') return 'r/';
+					return this.redirectTime + '/';
+				},
+				/* get redirectLabel() {
+					if (this.redir < 1) return 'Redirect Immediately';
+					if (this.redir > 10) return 'Never Redirect';
+					return 'Redirect After ' + this.redir + ' seconds';
+				}, */
+				get redirectLabel() {
+					if (!this.redirect) return '';
+					if (this.redirectTime === '0') return 'immediately';
+					return 'after ' + this.redirectTime + ' seconds';
+				},
 				get path() {
 					let url;
 					try {
@@ -61,8 +77,8 @@
 						url.host = split.join('.');
 						url = url.toString();
 					}
-					if (this.redirect) url = 'r/' + url;
-					if (url) return '/' + url;
+					// if (this.redirect) url = 'r/' + url;
+					if (url) return '/' + this.redirectValue + url;
 				},
 				get link() {
 					if (this.path) return window.location.host + this.path;
@@ -84,8 +100,17 @@
 		</header>
 		<main class="flex-shrink-0">
 			<section class="container mt-5">
+				<h2>What is this?</h2>
+				<p>This is a proxy for safely sharing misinformation URLs on social media. For more information about the issue this site is meant to solve, <a href="">read this page</a></p>
+			</section>
+			<section class="container">
+				<h2>How do I use it?</h2>
+				<p>You can either use the online URL generator below to create a link, or prepend <span class="fw-bold">weak.link/</span> to your URL when you paste it to a social media post.</p>
+			</section>
+			<section class="container mt-5">
+				<h2>Create a link</h2>
 				<div class="text-center">
-					<label for="url" class="form-label fs-3">Insert your link here:</label>
+					<label for="url" class="form-label fs-3">Insert your link here</label>
 					<input
 						type="text"
 						id="url"
@@ -106,13 +131,17 @@
 					<br />
 					<div class="form-check form-switch d-inline-block">
 						<input type="checkbox" id="redirect" v-model="redirect" class="form-check-input">
-						<label for="redirect" class="form-check-label">Automatic Redirect</label>
+						<label for="redirect" class="form-check-label">Automatically redirect {{redirectLabel}}</label>
+					</div>
+					<div v-if="redirect" class="d-block" style="max-width: 20em">
+						<!--<label for="redirectTime" class="form-label">{{redirectLabel}}</label>-->
+						<input type="range" class="form-range" min="0" max="10" id="redirectTime" v-model="redirectTime">
 					</div>
 				</div>
-				<p class="fs-3 mt-5 text-center">Use this link on social media:</p>
+				<p class="fs-3 mt-5">Use this link on social media</p>
 				<div class="text-center">
 					<p class="w-100 form-control form-control-lg fs-2 my-4" style="word-wrap: break-word">
-							<a v-if="link" :href="path">{{link}}</a>
+						<a v-if="link" :href="path">{{link}}</a>
 						<span v-else-if="url" class="fs-1 text-danger">Please enter a valid URL</span>
 						<span v-else>&nbsp;</span>
 					</p>
