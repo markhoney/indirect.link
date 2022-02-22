@@ -98,17 +98,23 @@
 				</a>
 			</nav>
 		</header>
-		<main class="flex-shrink-0">
-			<section class="container mt-5">
-				<h2>What is this?</h2>
-				<p>This is a proxy for safely sharing misinformation URLs on social media. For more information about the issue this site is meant to solve, <a href="">read this page</a></p>
+		<main class="container flex-shrink-0">
+			<section class="container mt-5 text-center">
+				<!--<h2>What is this?</h2>-->
+				<p class="fs-5 text-center">
+					A proxy for safely sharing misinformation URLs on social media.<br />
+					For more information about the issue this site is meant to solve, <a href="">read this page</a>
+				</p>
 			</section>
-			<section class="container">
-				<h2>How do I use it?</h2>
-				<p>You can either use the online URL generator below to create a link, or prepend <span class="fw-bold">weak.link/</span> to your URL when you paste it to a social media post.</p>
+			<section class="alert alert-primary text-center" role="alert">
+				<h2>How do I use this?</h2>
+				<p>
+					You can either use the online URL generator (below) to create a link, or prepend <span class="fw-bold">weak.link/</span> to your URL when you paste it to a social media post.<br />
+					You may also need to obscure the original link by adding an invalid character, such as an underscore _, to the
+				</p>
 			</section>
 			<section class="container mt-5">
-				<h2>Create a link</h2>
+				<!--<h2>Create a link</h2>-->
 				<div class="text-center">
 					<label for="url" class="form-label fs-3">Insert your link here</label>
 					<input
@@ -138,25 +144,18 @@
 						<input type="range" class="form-range" min="0" max="10" id="redirectTime" v-model="redirectTime">
 					</div>
 				</div>
-				<p class="fs-3 mt-5">Use this link on social media</p>
+				<p class="fs-3 mt-5 text-center">Use this link on social media</p>
 				<div class="text-center">
-					<p class="w-100 form-control form-control-lg fs-2 my-4" style="word-wrap: break-word">
-						<a v-if="link" :href="path">{{link}}</a>
-						<span v-else-if="url" class="fs-1 text-danger">Please enter a valid URL</span>
-						<span v-else>&nbsp;</span>
-					</p>
-					<p>
-						<i
-							v-if="link"
-							ref="copy"
-							class="bi-clipboard-plus fs-3"
-							style="cursor: copy"
-							data-bs-toggle="tooltip"
-							data-bs-placement="right"
-							title="Copy to clipboard"
-							@click="navigator.clipboard.writeText(link)"
-						></i>
-					</p>
+					<div class="w-100 input-group fs-2 my-4" style="word-wrap: break-word">
+						<div class="form-control form-control-lg fs-1">
+							<span v-if="link"><a :href="path">{{link}}</a></span>
+							<span v-else-if="url" class="text-danger">Please enter a valid URL</span>
+							<span v-else>&nbsp;</span>
+						</div>
+						<button class="btn btn-outline-secondary" style="cursor: copy" type="button" @click="navigator.clipboard.writeText(link)">
+							<i ref="copy" class="bi-clipboard-plus fs-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy to clipboard"></i>
+						</button>
+				</div>
 				</div>
 			</section>
 		</main>
