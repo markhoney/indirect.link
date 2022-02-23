@@ -101,22 +101,21 @@
 		<main class="container flex-shrink-0">
 			<section class="container mt-5 text-center">
 				<!--<h2>What is this?</h2>-->
-				<p class="fs-5 text-center">
-					A proxy for safely sharing misinformation URLs on social media.<br />
-					For more information about the issue this site is meant to solve, <a href="">read this page</a>
+				<p class="fs-3 text-center">
+					A tool for safely sharing links to misinformation on social media
 				</p>
 			</section>
-			<section class="alert alert-primary text-center" role="alert">
+			<!--<section class="alert alert-primary text-center" role="alert">
 				<h2>How do I use this?</h2>
 				<p>
 					You can either use the online URL generator (below) to create a link, or prepend <span class="fw-bold">weak.link/</span> to your URL when you paste it to a social media post.<br />
 					You may also need to obscure the original link by adding an invalid character, such as an underscore _, to the
 				</p>
-			</section>
+			</section>-->
 			<section class="container mt-5">
 				<!--<h2>Create a link</h2>-->
 				<div class="text-center">
-					<label for="url" class="form-label fs-3">Insert your link here</label>
+					<!--<label for="url" class="form-label fs-3">Insert your link here</label>-->
 					<input
 						type="text"
 						id="url"
@@ -125,7 +124,7 @@
 						autocorrect="no"
 						v-model="url"
 						class="w-100 form-control form-control-lg fs-2 my-4"
-						placeholder="e.g. https://misinformation.com/"
+						placeholder="Insert your link here (e.g. https://misinformation.com)"
 						required
 					>
 				</div>
@@ -144,19 +143,22 @@
 						<input type="range" class="form-range" min="0" max="10" id="redirectTime" v-model="redirectTime">
 					</div>
 				</div>
-				<p class="fs-3 mt-5 text-center">Use this link on social media</p>
-				<div class="text-center">
-					<div class="w-100 input-group fs-2 my-4" style="word-wrap: break-word">
-						<div class="form-control form-control-lg fs-1">
-							<span v-if="link"><a :href="path">{{link}}</a></span>
+				<!--<p class="fs-3 mt-5 text-center">Use this link on social media</p>-->
+				<div>
+					<div class="w-100 input-group my-4" style="word-wrap: break-word">
+						<div class="form-control form-control-lg fs-2">
+							<span v-if="link" class="text-center"><a :href="path">{{link}}</a></span>
 							<span v-else-if="url" class="text-danger">Please enter a valid URL</span>
-							<span v-else>&nbsp;</span>
+							<span v-else class="text-secondary fw-normal">Use this link on social media</span>
 						</div>
 						<button class="btn btn-outline-secondary" style="cursor: copy" type="button" @click="navigator.clipboard.writeText(link)">
 							<i ref="copy" class="bi-clipboard-plus fs-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy to clipboard"></i>
 						</button>
+					</div>
 				</div>
-				</div>
+			</section>
+			<section>
+				For more information about the issue this site is meant to solve, <a href="">read this page</a>
 			</section>
 		</main>
 		<footer class="footer mt-auto py-3 text-center bg-dark text-light">
