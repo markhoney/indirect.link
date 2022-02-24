@@ -34,6 +34,9 @@
 				redirectTime: '0',
 				warning: true,
 				invalid: '_',
+				async paste() {
+					this.url = await navigator.clipboard.readText();
+				},
 				get redirectValue() {
 					if (!this.redirect) return '';
 					if (this.redirectTime === '0') return 'r/';
@@ -116,17 +119,22 @@
 				<!--<h2>Create a link</h2>-->
 				<div class="text-center">
 					<!--<label for="url" class="form-label fs-3">Insert your link here</label>-->
-					<input
-						type="text"
-						id="url"
-						type="url"
-						spellcheck="false"
-						autocorrect="no"
-						v-model="url"
-						class="w-100 form-control form-control-lg fs-2 my-4"
-						placeholder="Insert your link here (e.g. https://misinformation.com)"
-						required
-					>
+					<div class="w-100 input-group my-4" style="word-wrap: break-word">
+						<input
+							type="text"
+							id="url"
+							type="url"
+							spellcheck="false"
+							autocorrect="no"
+							v-model="url"
+							class="form-control form-control-lg fs-2"
+							placeholder="Insert your link here (e.g. https://misinformation.com)"
+							required
+						>
+						<button class="btn btn-outline-secondary" style="cursor: copy" type="button" @click="paste">
+							<i ref="copy" class="bi-clipboard-plus fs-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Paste from clipboard"></i>
+						</button>
+					</div>
 				</div>
 				<div>
 					<div class="form-check form-switch d-inline-block">
@@ -152,7 +160,7 @@
 							<span v-else class="text-secondary fw-normal">Use this link on social media</span>
 						</div>
 						<button class="btn btn-outline-secondary" style="cursor: copy" type="button" @click="navigator.clipboard.writeText(link)">
-							<i ref="copy" class="bi-clipboard-plus fs-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy to clipboard"></i>
+							<i ref="copy" class="bi-clipboard-check fs-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy to clipboard"></i>
 						</button>
 					</div>
 				</div>
