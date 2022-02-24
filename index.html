@@ -31,7 +31,7 @@
 				url: '',
 				obscure: true,
 				redirect: false,
-				redirectTime: '0',
+				redirectTime: '5',
 				warning: true,
 				invalid: '_',
 				async paste() {
@@ -137,12 +137,12 @@
 					</div>
 				</div>
 				<div>
-					<div class="form-check form-switch d-inline-block">
+					<div class="form-check form-switch d-inline-block fs-5">
 						<input type="checkbox" id="obscure" v-model="obscure" class="form-check-input">
 						<label for="obscure" class="form-check-label">Obscure URL</label>
 					</div>
 					<br />
-					<div class="form-check form-switch d-inline-block">
+					<div class="form-check form-switch d-inline-block fs-5">
 						<input type="checkbox" id="redirect" v-model="redirect" class="form-check-input">
 						<label for="redirect" class="form-check-label">Automatically redirect {{redirectLabel}}</label>
 					</div>
@@ -165,7 +165,7 @@
 					</div>
 				</div>
 			</section>
-			<section>
+			<section class="fs-4 text-center mt-5">
 				For more information about the issue this site is meant to solve, <a href="">read this page</a>
 			</section>
 		</main>
