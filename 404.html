@@ -90,6 +90,8 @@
 						let url;
 						try {
 							url = new URL(split.join('/'));
+							// Remove fbclid from the url
+							if (url.searchParams.has('fbclid')) url.searchParams.delete('fbclid');
 						} catch (e) {
 							// return null;
 							console.log(e);
