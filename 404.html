@@ -51,6 +51,7 @@
 					'groups/rationalistsnz',
 					'HumanistNZ',
 				],
+				identifiers: ['dclid', 'fbclid', 'gclid', 'gclsrc', 'msclkid'],
 				url: null,
 				redirect: null,
 				warning: {
@@ -91,7 +92,9 @@
 						try {
 							url = new URL(split.join('/'));
 							// Remove fbclid from the url
-							if (url.searchParams.has('fbclid')) url.searchParams.delete('fbclid');
+							for (const id of this.identifiers) {
+								if (url.searchParams.has(id)) url.searchParams.delete(id);
+							}
 						} catch (e) {
 							// return null;
 							console.log(e);

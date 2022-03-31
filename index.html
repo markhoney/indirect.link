@@ -34,6 +34,7 @@
 				redirectTime: '5',
 				warning: true,
 				invalid: '_',
+				identifiers: ['dclid', 'fbclid', 'gclid', 'gclsrc', 'msclkid'],
 				async paste() {
 					this.url = await navigator.clipboard.readText();
 				},
@@ -63,7 +64,9 @@
 							return null;
 						}
 					}
-					if (url.searchParams.has('fbclid')) url.searchParams.delete('fbclid');
+					for (const id of this.identifiers) {
+						if (url.searchParams.has(id)) url.searchParams.delete(id);
+					}
 					if (this.obscure) {
 						url = basex.convert(url.toString(), basex.dict.base85uri, basex.dict.base64url);
 					} else {
