@@ -17,12 +17,11 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-	if (!(event.request.url.startsWith('http'))) return;
+	if (!(event.request.url.startsWith('http')) || event.request.url.startsWith('https://www.google-analytics.com/')) return;
 	event.respondWith(
 		caches.match(event.request).then((resp) => {
 			return resp || fetch(event.request).then((response) => {
 				return caches.open('v1').then((cache) => {
-					console.log('caching', event.request.url);
 					cache.put(event.request, response.clone());
 					return response;
 				});
