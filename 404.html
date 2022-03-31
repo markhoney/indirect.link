@@ -86,11 +86,14 @@
 						this.redirect = Number(split[0]);
 						split.shift();
 					}
-					if (!split[0].includes('.')) this.url = basex.convert(split.join('/'), basex.dict.base64url, basex.dict.base85uri);
-					else {
-						let url;
+					this.site = split.join('/');
+					let url;
+					if (!this.site.includes('.')) {
+						const urlString = basex.convert(this.site, basex.dict.base64url, basex.dict.base85uri);
+						url = new URL(urlString);
+					} else {
 						try {
-							url = new URL(split.join('/'));
+							url = new URL(this.site);
 							// Remove fbclid from the url
 							for (const id of this.identifiers) {
 								if (url.searchParams.has(id)) url.searchParams.delete(id);
@@ -100,8 +103,8 @@
 							console.log(e);
 						}
 						url.host = url.host.replace(/[^\-\.abcdefghijklmnopqrstuvwxyz0123456789ßàÁâãóôþüúðæåïçèõöÿýòäœêëìíøùîûñé]/g, '');
-						this.url = url.toString();
 					}
+					this.url = url.toString();
 					if (this.redirect !== null) this.countdown();
 					// else this.go();
 				},
