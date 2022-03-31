@@ -132,8 +132,8 @@
 						<p>{{warning.text}}</p>
 					</div>
 				</div>
-				<p v-if="redirect !== null">Redirecting you <span v-if="redirect">in {{redirect}} seconds </span>to...</p>
-				<p v-else>Click this link...</p>
+				<p v-if="redirect !== null" class="fs-5">Redirecting you <span v-if="redirect">in {{redirect}} seconds </span>to...</p>
+				<p v-else class="fs-5">Click this link...</p>
 				<p v-if="valid" class="fs-2"><a :href="url" rel="nofollow noopener noreferrer">{{url}}</a></p>
 				<p v-else-if="valid === false">Invalid Referrer</p>
 				<p v-else>Invalid URL</p>
