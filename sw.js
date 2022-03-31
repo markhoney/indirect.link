@@ -22,6 +22,7 @@ self.addEventListener('fetch', (event) => {
 		caches.match(event.request).then((resp) => {
 			return resp || fetch(event.request).then((response) => {
 				return caches.open('v1').then((cache) => {
+					console.log('caching', event.request.url);
 					cache.put(event.request, response.clone());
 					return response;
 				});
