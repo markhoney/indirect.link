@@ -6,6 +6,7 @@ module.exports = {
 	},
 	parserOptions: {
 		parser: 'babel-eslint',
+		ecmaVersion: 11,
 	},
 	extends: [
 		// 'plugin:vue/recommended',
