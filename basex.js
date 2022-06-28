@@ -9,7 +9,7 @@ const basex = {
 	},
 	add(x, y, base) {
 		var _m = Math.max(x.length, y.length);
-		for (var _c = _n = 0,_r = []; _n < _m || _c; _c = Math.floor(_z / base)) {
+		for (var _c = _n = 0, _r = []; _n < _m || _c; _c = Math.floor(_z / base)) {
 			var _z = _c + (_n < x.length ? x[_n] : 0) + (_n < y.length ? y[_n] : 0);
 			var _n = _r.push(_z % base);
 		}

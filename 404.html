@@ -6,7 +6,7 @@
 		<title>Weak Link</title>
 		<meta property="og:site_name" content="Weak Link">
 		<meta property="og:title" content="Warning: Potential Misinformation">
-		<meta property="og:description" name="description" content="Caution: The website you are about to be linked to likely contains misinformation. It has been obfuscated to allow sharing of dubious content on social media by groups who are skeptical of their content.">
+		<meta property="og:description" name="description" content="The website you are about to be linked to likely contains misinformation. It has been obfuscated to allow sharing of dubious content on social media by groups who are skeptical of their content.">
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://weak.link">
 		<meta property="og:image" content="https://weak.link/logo.jpg">
@@ -51,6 +51,7 @@
 					'groups/rationalistsnz',
 					'HumanistNZ',
 				],
+				identifiers: ['dclid', 'fbclid', 'gclid', 'gclsrc', 'msclkid'],
 				url: null,
 				redirect: null,
 				warning: {
@@ -85,18 +86,25 @@
 						this.redirect = Number(split[0]);
 						split.shift();
 					}
-					if (!split[0].includes('.')) this.url = basex.convert(split.join('/'), basex.dict.base64url, basex.dict.base85uri);
-					else {
-						let url;
+					this.site = split.join('/');
+					let url;
+					if (!this.site.includes('.')) {
+						const urlString = basex.convert(this.site, basex.dict.base64url, basex.dict.base85uri);
+						url = new URL(urlString);
+					} else {
 						try {
-							url = new URL(split.join('/'));
+							url = new URL(this.site);
+							// Remove fbclid from the url
+							for (const id of this.identifiers) {
+								if (url.searchParams.has(id)) url.searchParams.delete(id);
+							}
 						} catch (e) {
 							// return null;
 							console.log(e);
 						}
 						url.host = url.host.replace(/[^\-\.abcdefghijklmnopqrstuvwxyz0123456789ßàÁâãóôþüúðæåïçèõöÿýòäœêëìíøùîûñé]/g, '');
-						this.url = url.toString();
 					}
+					this.url = url.toString();
 					if (this.redirect !== null) this.countdown();
 					// else this.go();
 				},
@@ -115,21 +123,23 @@
 				</a>
 			</nav>
 		</header>
-		<main class="flex-shrink-0" @vue:mounted="mounted">
+		<main class="container flex-shrink-0" style="max-width: 960px" @vue:mounted="mounted">
 			<section class="container text-center mt-5">
 				<div class="alert alert-danger d-flex align-items-center mb-5" role="alert">
-					<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+						<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+					</svg>
 					<div>
 						<h2>{{warning.title}}</h2>
 						<p>{{warning.text}}</p>
 					</div>
 				</div>
-				<p v-if="redirect !== null">Redirecting you <span v-if="redirect">in {{redirect}} seconds </span>to...</p>
-				<p v-else>Click this link...</p>
+				<p v-if="redirect !== null" class="fs-5">Redirecting you <span v-if="redirect">in {{redirect}} seconds </span>to...</p>
+				<p v-else class="fs-5">Click this link...</p>
 				<p v-if="valid" class="fs-2"><a :href="url" rel="nofollow noopener noreferrer">{{url}}</a></p>
 				<p v-else-if="valid === false">Invalid Referrer</p>
 				<p v-else>Invalid URL</p>
-				<p>(Referrer: {{referrer}})</p>
+				<!--<p>(Referrer: {{referrer}})</p>-->
 			</section>
 		</main>
 		<footer class="footer mt-auto py-3 text-center bg-dark text-light">
