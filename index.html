@@ -27,6 +27,7 @@
 		<script type="text/javascript" src="/app.js"></script>
 		<script type="module">
 			import {createApp} from 'https://unpkg.com/petite-vue?module';
+			import {state} from 'https://unpkg.com/vue-petite-transition?module';
 			createApp({
 				url: '',
 				obscure: true,
@@ -93,7 +94,7 @@
 				mounted() {
 					new bootstrap.Tooltip(this.$refs.copy);
 				},
-			}).mount();
+			}).directive('state', state).mount();
 		</script>
 	</head>
 	<body class="d-flex flex-column h-100">
